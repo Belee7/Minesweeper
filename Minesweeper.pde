@@ -11,7 +11,7 @@ boolean gameOver = false;
 
 void setup ()
 {
-  size(400, 400);
+  size(500, 500);
   textAlign(CENTER, CENTER);
   bombs = new ArrayList();
   // make the manager
@@ -47,6 +47,7 @@ public void setBombs()
 public void draw ()
 {
   background( 0 );
+
   if (isWon())
     displayWinningMessage();
 }
@@ -56,7 +57,7 @@ public boolean isWon()
   {
     for (int c = 0; c < NUM_COLS; c++ )
     {
-      if ( buttons[r][c].isClicked()== false && !bombs.contains(buttons[r][c]))
+      if ( buttons[r][c].isClicked()== false)
       {
       return false;
       }
@@ -70,7 +71,8 @@ public void displayLosingMessage()
 }
 public void displayWinningMessage()
 {
-  text("You `won",120,120);
+ fill(255);
+  text ("You won",300,450);
 }
 
 public class MSButton
