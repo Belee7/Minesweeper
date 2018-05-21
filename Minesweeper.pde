@@ -5,13 +5,13 @@ private ArrayList <MSButton> bombs = new ArrayList<MSButton>(); //ArrayList of j
 
 public final static int  NUM_ROWS = 20;
 public final static int NUM_COLS = 20;
-public final static int BOMBS = 5;
+public final static int BOMBS = 50;
 boolean gameOver = false;
 
 
 void setup ()
 {
-  size(500, 500);
+  size(400, 425);
   textAlign(CENTER, CENTER);
   bombs = new ArrayList();
   // make the manager
@@ -39,40 +39,61 @@ public void setBombs()
     if (!(bombs.contains(buttons[r][c])))
     {
       bombs.add(buttons[r][c]);
-      System.out.println(r + "," + c);
     }
   }
 }
 
 public void draw ()
 {
-  background( 0 );
+  if (gameOver == true)
+  {
+    fill(255);
+    text ("You lost ;(", 50, 410);
+  } 
+  else
+  {
+    background( 0 );
 
-  if (isWon())
-    displayWinningMessage();
+    if (isWon())
+      displayWinningMessage();
+  }
 }
 public boolean isWon()
 {
+
+
   for (int r = 0; r < NUM_ROWS; r++ )
   {
     for (int c = 0; c < NUM_COLS; c++ )
     {
       if ( buttons[r][c].isClicked()== false)
       {
-      return false;
+        return false;
       }
     }
   }
-   return true;
+  return true;
 }
+
 public void displayLosingMessage()
 {
+
+  fill(255);
+
+  for (int r = 0; r < NUM_ROWS; r++ )
+  {
+    for (int c = 0; c < NUM_COLS; c++ )
+    {
+      buttons[r][c].clicked = true;
+    }
+  }  
+
   gameOver = true;
 }
 public void displayWinningMessage()
 {
- fill(255);
-  text ("You won",300,450);
+  fill(255);
+  text ("You won!", 50, 410);
 }
 
 public class MSButton
@@ -106,8 +127,8 @@ public class MSButton
 
   public void mousePressed () 
   {
-    if(gameOver == true)
-    return;
+    if (gameOver == true)
+      return;
     clicked = true;
     if (mouseButton == RIGHT)
     {
